@@ -25,6 +25,9 @@ nameSignin = Data.user["username"]
 emailSignin = Data.user["email"]
 passwordSignin = Data.user["password"]
 
+emailInvalid = fake.email()
+passwordInvalid = fake.password()
+
 class TestAuthorization:
 
   @pytest.fixture
@@ -68,3 +71,10 @@ class TestAuthorization:
     """uncomment these code lines if you want to delete account, like it's specified in steps 9-10"""
   # self.authorization.clickDeleteNav()
   # assert self.authorization.getHeaderDeleteSuccess().is_visible()
+
+  def test_invalid_login(self, test_setup):
+    assert self.authorization.getSigninHeader().is_visible()
+    self.authorization.fillSigninForm(emailInvalid, passwordInvalid)
+    self.authorization.clickButtonSignin()
+    assert self.authorization.getLoginError().is_visible()
+    assert self.authorization.getLoginError().inner_text() == 'Your email or password is incorrect!'

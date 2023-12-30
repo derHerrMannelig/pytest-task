@@ -39,6 +39,7 @@ buttonContinue = 'a[data-qa="continue-button"]'
 username = 'li > a > b'
 loginEmail = 'input[data-qa="login-email"]'
 loginPassword = 'input[data-qa="login-password"]'
+loginError = 'form[action="/login"] > p'
 
 class Authorization():
   def __init__(self, page: Page):
@@ -104,6 +105,9 @@ class Authorization():
 
   def getUsername(self):
     return self.base.get(username)
+
+  def getLoginError(self):
+    return self.base.get(loginError)
 
   def getDayOptions(self):
     return self.base.get(dayOptions).all()
