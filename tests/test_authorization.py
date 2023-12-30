@@ -2,6 +2,7 @@ import pytest
 
 from pages.authorization_page import Authorization
 from pages.base_page import Base
+from data.data import Data
 from faker import Faker
 import random
 fake = Faker()
@@ -20,6 +21,10 @@ cityPersonal = fake.city()
 zipcodePersonal = fake.zipcode()
 phonePersonal = fake.basic_phone_number()
 
+nameSignin = Data.user["username"]
+emailSignin = Data.user["email"]
+passwordSignin = Data.user["password"]
+
 class TestAuthorization:
 
   @pytest.fixture
@@ -30,9 +35,9 @@ class TestAuthorization:
     self.authorization = Authorization(self.page)
     self.base.url("")
     assert self.base.getBody().is_visible()
+    self.authorization.clickLoginNav()
 
   def test_register(self, test_setup):
-    self.authorization.clickLoginNav()
     assert self.authorization.getSignupHeader().is_visible()
     self.authorization.fillSignupForm(nameSignup, emailSignup)
     self.authorization.clickButtonSignup()
@@ -53,3 +58,13 @@ class TestAuthorization:
     self.authorization.clickDeleteNav()
     assert self.authorization.getHeaderDeleteSuccess().is_visible()
     self.authorization.clickButtonContinue()
+
+  def test_valid_login(self, test_setup):
+    assert self.authorization.getSigninHeader().is_visible()
+    self.authorization.fillSigninForm(emailSignin, passwordSignin)
+    self.authorization.clickButtonSignin()
+    assert self.authorization.getUsername().is_visible()
+    assert self.authorization.getUsername().inner_text() == nameSignin
+    """uncomment these code lines if you want to delete account, like it's specified in steps 9-10"""
+  # self.authorization.clickDeleteNav()
+  # assert self.authorization.getHeaderDeleteSuccess().is_visible()

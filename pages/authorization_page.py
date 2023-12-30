@@ -4,10 +4,12 @@ from pages.base_page import Base
 loginNav = 'a[href="/login"]'
 deleteNav = 'a[href="/delete_account"]'
 signupHeader = 'div.signup-form > h2'
+signinHeader = 'div.login-form > h2'
 registerHeaders = 'h2.title.text-center > b'
 inputName = 'input[data-qa="signup-name"]'
 inputEmail = 'input[data-qa="signup-email"]'
 buttonSignup = 'button[data-qa="signup-button"]'
+buttonSignin = 'button[data-qa="login-button"]'
 buttonCreateAccount = 'button[data-qa="create-account"]'
 radioGender1 = 'input#id_gender1'
 radioGender2 = 'input#id_gender2'
@@ -35,6 +37,8 @@ headerSignupSuccess = 'h2[data-qa="account-created"]'
 headerDeleteSuccess = 'h2[data-qa="account-deleted"] > b'
 buttonContinue = 'a[data-qa="continue-button"]'
 username = 'li > a > b'
+loginEmail = 'input[data-qa="login-email"]'
+loginPassword = 'input[data-qa="login-password"]'
 
 class Authorization():
   def __init__(self, page: Page):
@@ -49,6 +53,9 @@ class Authorization():
 
   def clickButtonSignup(self):
     self.base.click(buttonSignup)
+
+  def clickButtonSignin(self):
+    self.base.click(buttonSignin)
 
   def clickGender1(self):
     self.base.click(radioGender1)
@@ -70,6 +77,9 @@ class Authorization():
 
   def getSignupHeader(self):
     return self.base.get(signupHeader)
+
+  def getSigninHeader(self):
+    return self.base.get(signinHeader)
 
   def getRegisterHeaders(self):
     return self.base.get(registerHeaders)
@@ -110,6 +120,10 @@ class Authorization():
   def fillSignupForm(self, name, email):
     self.base.get(inputName).fill(name)
     self.base.get(inputEmail).fill(email)
+
+  def fillSigninForm(self, email, password):
+    self.base.get(loginEmail).fill(email)
+    self.base.get(loginPassword).fill(password)
 
   def completeSignupForm(self, gender, password, day, month, year):
     if gender == 1:
