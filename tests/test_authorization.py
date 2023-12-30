@@ -78,3 +78,12 @@ class TestAuthorization:
     self.authorization.clickButtonSignin()
     assert self.authorization.getLoginError().is_visible()
     assert self.authorization.getLoginError().inner_text() == 'Your email or password is incorrect!'
+
+  def test_logout(self, test_setup):
+    assert self.authorization.getSigninHeader().is_visible()
+    self.authorization.fillSigninForm(emailSignin, passwordSignin)
+    self.authorization.clickButtonSignin()
+    assert self.authorization.getUsername().is_visible()
+    assert self.authorization.getUsername().inner_text() == nameSignin
+    self.authorization.clickLogoutNav()
+    assert self.page.url == 'https://automationexercise.com/login'

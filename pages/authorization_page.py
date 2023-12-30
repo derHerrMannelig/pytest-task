@@ -3,6 +3,7 @@ from pages.base_page import Base
 
 loginNav = 'a[href="/login"]'
 deleteNav = 'a[href="/delete_account"]'
+logoutNav = 'a[href="/logout"]'
 signupHeader = 'div.signup-form > h2'
 signinHeader = 'div.login-form > h2'
 registerHeaders = 'h2.title.text-center > b'
@@ -51,6 +52,9 @@ class Authorization():
 
   def clickDeleteNav(self):
     self.base.click(deleteNav)
+
+  def clickLogoutNav(self):
+    self.base.click(logoutNav)
 
   def clickButtonSignup(self):
     self.base.click(buttonSignup)
