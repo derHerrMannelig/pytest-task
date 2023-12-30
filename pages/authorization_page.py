@@ -41,6 +41,7 @@ username = 'li > a > b'
 loginEmail = 'input[data-qa="login-email"]'
 loginPassword = 'input[data-qa="login-password"]'
 loginError = 'form[action="/login"] > p'
+signupError = 'form[action="/signup"] > p'
 
 class Authorization():
   def __init__(self, page: Page):
@@ -112,6 +113,9 @@ class Authorization():
 
   def getLoginError(self):
     return self.base.get(loginError)
+
+  def getSignupError(self):
+    return self.base.get(signupError)
 
   def getDayOptions(self):
     return self.base.get(dayOptions).all()

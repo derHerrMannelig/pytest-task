@@ -87,3 +87,10 @@ class TestAuthorization:
     assert self.authorization.getUsername().inner_text() == nameSignin
     self.authorization.clickLogoutNav()
     assert self.page.url == 'https://automationexercise.com/login'
+
+  def test_register_existing(self, test_setup):
+    assert self.authorization.getSignupHeader().is_visible()
+    self.authorization.fillSignupForm(nameSignin, emailSignin)
+    self.authorization.clickButtonSignup()
+    assert self.authorization.getSignupError().is_visible()
+    assert self.authorization.getSignupError().inner_text() == 'Email Address already exist!'
