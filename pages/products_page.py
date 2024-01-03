@@ -4,12 +4,16 @@ from pages.base_page import Base
 productsNav = 'a[href="/products"]'
 productsList = 'div.features_items'
 productsView = 'div.choose > ul > li > a'
+productsNames = 'div.productinfo > p'
 productName = 'div.product-information > h2'
 productCategory = '// *[contains(text(), "Category:")]'
 productPrice = 'div.product-information > span > span'
 productAvailability = '// *[contains(text(), "Availability:")]'
 productCondition = '// *[contains(text(), "Condition:")]'
 productBrand = '// *[contains(text(), "Brand:")]'
+productSearch = 'input#search_product'
+submitSearch = 'button#submit_search'
+searchedProducts = 'h2.title'
 
 class Products():
   def __init__(self, page: Page):
@@ -42,3 +46,16 @@ class Products():
 
   def getProductBrand(self):
     return self.base.get(productBrand)
+
+  def getProductsNames(self):
+    return self.base.get(productsNames).all()
+
+  def getSearchedProducts(self):
+    return self.base.get(searchedProducts)
+
+  def getSearchResult(self):
+    return self.base.get(productsNames)
+
+  def searchProduct(self, prompt):
+    self.base.get(productSearch).fill(prompt)
+    self.base.click(submitSearch)

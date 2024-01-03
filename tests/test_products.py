@@ -2,6 +2,7 @@ import pytest
 
 from pages.products_page import Products
 from pages.base_page import Base
+import random
 
 class TestProducts:
 
@@ -26,3 +27,11 @@ class TestProducts:
     assert self.products.getProductAvailability().is_visible()
     assert self.products.getProductCondition().is_visible()
     assert self.products.getProductBrand().is_visible()
+
+  def test_search(self, test_setup):
+    index = random.randint(0, len(self.products.getProductsNames()) - 1)
+    prompt = self.products.getProductsNames()[index].text_content()
+    self.products.searchProduct(f'{prompt}')
+    assert self.products.getSearchedProducts().is_visible()
+    assert self.products.getSearchResult().is_visible()
+    assert self.products.getSearchResult().inner_text() == f'{prompt}'
