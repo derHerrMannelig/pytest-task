@@ -2,6 +2,10 @@ import pytest
 
 from pages.misc_page import Miscellaneous
 from pages.base_page import Base
+from faker import Faker
+fake = Faker()
+
+emailSub = fake.email()
 
 class TestMiscellaneous:
 
@@ -17,3 +21,11 @@ class TestMiscellaneous:
   def test_cases_page(self, test_setup):
     self.misc.clickCasesNav()
     assert self.page.url == 'https://automationexercise.com/test_cases'
+
+  def test_subscription(self, test_setup):
+    self.misc.getFooter().scroll_into_view_if_needed()
+    assert self.misc.getSubHeader().is_visible()
+    assert self.misc.getSubHeader().inner_text() == 'SUBSCRIPTION'
+    self.misc.fillSubForm(emailSub)
+    assert self.misc.getAlertSuccess().is_visible()
+    assert self.misc.getAlertSuccess().inner_text() == 'You have been successfully subscribed!'
