@@ -1,4 +1,5 @@
 import pytest
+import os
 
 from pages.misc_page import Miscellaneous
 from pages.base_page import Base
@@ -6,6 +7,14 @@ from faker import Faker
 fake = Faker()
 
 emailSub = fake.email()
+
+nameContact = fake.name()
+emailContact = fake.email()
+subjectContact = fake.word()
+messageContact = fake.paragraph(nb_sentences=5)
+
+scriptPath = os.path.abspath(__file__)
+filePath = os.path.join(os.path.dirname(scriptPath), '..', 'data', 'doge.jpg')
 
 class TestMiscellaneous:
 
@@ -17,6 +26,17 @@ class TestMiscellaneous:
     self.misc = Miscellaneous(self.page)
     self.base.url("")
     assert self.base.getBody().is_visible()
+
+  def test_contact(self, test_setup):
+    self.misc.clickContactNav()
+    assert self.misc.getContactHeader().is_visible()
+    self.misc.fillContactForm(nameContact, emailContact, subjectContact, messageContact)
+    self.misc.fileSelect(filePath)
+    self.misc.clickContactSubmit()
+    assert self.misc.getContactAlert().is_visible()
+    assert self.misc.getContactAlert().inner_text() == 'Success! Your details have been submitted successfully.'
+    self.misc.clickButtonHome()
+    assert self.page.url == 'https://automationexercise.com/'
 
   def test_cases_page(self, test_setup):
     self.misc.clickCasesNav()
