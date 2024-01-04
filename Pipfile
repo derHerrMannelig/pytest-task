@@ -7,6 +7,7 @@ name = "pypi"
 pytest-playwright = "*"
 faker = "*"
 pytest-base-url = "*"
+pytest-xdist = "*"
 
 [dev-packages]
 
