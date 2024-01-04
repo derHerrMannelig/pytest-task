@@ -13,3 +13,10 @@ pytest-xdist = "*"
 
 [requires]
 python_version = "3.12"
+
+[scripts]
+default = "pytest"
+parallel = "pytest --base-url http://automationexercise.com --numprocesses auto"
+headed-chromium = "pytest --browser chromium --headed"
+headed-firefox = "pytest --browser firefox --headed"
+headed-webkit = "pytest --browser webkit --headed"
