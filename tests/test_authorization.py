@@ -30,6 +30,9 @@ passwordSignin = Data.user["password"]
 emailInvalid = fake.email()
 passwordInvalid = fake.password()
 
+@allure.parent_suite("Tests for Automation Exercise website")
+@allure.suite("Authorization tests")
+@allure.sub_suite("Tests for features, related to authentication and authorization")
 class TestAuthorization:
 
   @pytest.fixture

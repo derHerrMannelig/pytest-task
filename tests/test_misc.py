@@ -18,6 +18,9 @@ messageContact = fake.paragraph(nb_sentences=5)
 scriptPath = os.path.abspath(__file__)
 filePath = os.path.join(os.path.dirname(scriptPath), '..', 'data', 'doge.jpg')
 
+@allure.parent_suite("Tests for Automation Exercise website")
+@allure.suite("Miscellaneous tests")
+@allure.sub_suite("Tests for miscellaneous features")
 class TestMiscellaneous:
 
   @pytest.fixture

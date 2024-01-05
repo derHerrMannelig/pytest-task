@@ -6,6 +6,9 @@ from pages.base_page import Base
 from utils.tools import take_screenshot
 import random
 
+@allure.parent_suite("Tests for Automation Exercise website")
+@allure.suite("Products tests")
+@allure.sub_suite("Tests for features, related to Products page")
 class TestProducts:
 
   @pytest.fixture
