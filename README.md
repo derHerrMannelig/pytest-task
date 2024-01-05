@@ -6,7 +6,6 @@ This is repository for pytest task.
 [Report from latest pipeline run](https://derherrmannelig.github.io/pytest-task/index.html)  
 ## Requirements
 [Python](https://www.python.org/) (3.12)  
-[Java](https://www.oracle.com/java/technologies/downloads/#java8) (8 or higher)  
 [Allure Report](https://allurereport.org/docs/gettingstarted-installation/)  
 ## Installation
 1. Clone this repo;
