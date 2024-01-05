@@ -13,7 +13,6 @@ jobs:
       - name: Install dependencies
         run: |
           pip install pipenv
-          pipenv shell
           pipenv install --system
           playwright install chromium
       - name: Run tests
