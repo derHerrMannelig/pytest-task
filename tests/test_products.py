@@ -1,4 +1,5 @@
 import pytest
+import allure
 
 from pages.products_page import Products
 from pages.base_page import Base
@@ -16,6 +17,7 @@ class TestProducts:
     self.products.clickProductsNav()
     assert self.page.url == 'https://automationexercise.com/products'
 
+  @allure.title("Verify All Products and product detail page")
   def test_product_detail(self, test_setup):
     assert self.products.getProductsList().is_visible()
     self.products.clickFirstProductView()
@@ -28,6 +30,7 @@ class TestProducts:
     assert self.products.getProductBrand().is_visible()
     take_screenshot(self.page, 'product_detail')
 
+  @allure.title("Search Product")
   def test_search(self, test_setup):
     index = random.randint(0, len(self.products.getProductsNames()) - 1)
     prompt = self.products.getProductsNames()[index].text_content()

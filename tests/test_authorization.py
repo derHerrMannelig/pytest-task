@@ -1,4 +1,5 @@
 import pytest
+import allure
 
 from pages.authorization_page import Authorization
 from pages.base_page import Base
@@ -39,6 +40,7 @@ class TestAuthorization:
     assert self.base.getBody().is_visible()
     self.authorization.clickLoginNav()
 
+  @allure.title("Register User")
   def test_register(self, test_setup):
     assert self.authorization.getSignupHeader().is_visible()
     self.authorization.fillSignupForm(nameSignup, emailSignup)
@@ -62,6 +64,7 @@ class TestAuthorization:
     self.authorization.clickButtonContinue()
     take_screenshot(self.page, 'register')
 
+  @allure.title("Login User with correct email and password")
   def test_valid_login(self, test_setup):
     assert self.authorization.getSigninHeader().is_visible()
     self.authorization.fillSigninForm(emailSignin, passwordSignin)
@@ -73,6 +76,7 @@ class TestAuthorization:
   # assert self.authorization.getHeaderDeleteSuccess().is_visible()
     take_screenshot(self.page, 'valid_login')
 
+  @allure.title("Login User with incorrect email and password")
   def test_invalid_login(self, test_setup):
     assert self.authorization.getSigninHeader().is_visible()
     self.authorization.fillSigninForm(emailInvalid, passwordInvalid)
@@ -81,6 +85,7 @@ class TestAuthorization:
     assert self.authorization.getLoginError().inner_text() == 'Your email or password is incorrect!'
     take_screenshot(self.page, 'invalid_login')
 
+  @allure.title("Logout User")
   def test_logout(self, test_setup):
     assert self.authorization.getSigninHeader().is_visible()
     self.authorization.fillSigninForm(emailSignin, passwordSignin)
@@ -91,6 +96,7 @@ class TestAuthorization:
     assert self.page.url == 'https://automationexercise.com/login'
     take_screenshot(self.page, 'logout')
 
+  @allure.title("Register User with existing email")
   def test_register_existing(self, test_setup):
     assert self.authorization.getSignupHeader().is_visible()
     self.authorization.fillSignupForm(nameSignin, emailSignin)

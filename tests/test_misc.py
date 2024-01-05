@@ -1,4 +1,5 @@
 import pytest
+import allure
 import os
 
 from pages.misc_page import Miscellaneous
@@ -26,6 +27,7 @@ class TestMiscellaneous:
     self.misc = Miscellaneous(self.page)
     assert self.base.getBody().is_visible()
 
+  @allure.title("Contact Us Form")
   def test_contact(self, test_setup):
     self.misc.clickContactNav()
     assert self.misc.getContactHeader().is_visible()
@@ -38,11 +40,13 @@ class TestMiscellaneous:
     assert self.page.url == 'https://automationexercise.com/'
     take_screenshot(self.page, 'contact')
 
+  @allure.title("Verify Test Cases Page")
   def test_cases_page(self, test_setup):
     self.misc.clickCasesNav()
     assert self.page.url == 'https://automationexercise.com/test_cases'
     take_screenshot(self.page, 'cases_page')
 
+  @allure.title("Verify Subscription in home page")
   def test_subscription(self, test_setup):
     self.misc.getFooter().scroll_into_view_if_needed()
     assert self.misc.getSubHeader().is_visible()
