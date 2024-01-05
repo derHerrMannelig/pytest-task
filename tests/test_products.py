@@ -2,6 +2,7 @@ import pytest
 
 from pages.products_page import Products
 from pages.base_page import Base
+from utils.tools import take_screenshot
 import random
 
 class TestProducts:
@@ -25,6 +26,7 @@ class TestProducts:
     assert self.products.getProductAvailability().is_visible()
     assert self.products.getProductCondition().is_visible()
     assert self.products.getProductBrand().is_visible()
+    take_screenshot(self.page, 'product_detail')
 
   def test_search(self, test_setup):
     index = random.randint(0, len(self.products.getProductsNames()) - 1)
@@ -33,3 +35,4 @@ class TestProducts:
     assert self.products.getSearchedProducts().is_visible()
     assert self.products.getSearchResult().is_visible()
     assert self.products.getSearchResult().inner_text() == f'{prompt}'
+    take_screenshot(self.page, 'search')

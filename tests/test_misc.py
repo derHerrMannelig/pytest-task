@@ -3,6 +3,7 @@ import os
 
 from pages.misc_page import Miscellaneous
 from pages.base_page import Base
+from utils.tools import take_screenshot
 from faker import Faker
 fake = Faker()
 
@@ -35,10 +36,12 @@ class TestMiscellaneous:
     assert self.misc.getContactAlert().inner_text() == 'Success! Your details have been submitted successfully.'
     self.misc.clickButtonHome()
     assert self.page.url == 'https://automationexercise.com/'
+    take_screenshot(self.page, 'contact')
 
   def test_cases_page(self, test_setup):
     self.misc.clickCasesNav()
     assert self.page.url == 'https://automationexercise.com/test_cases'
+    take_screenshot(self.page, 'cases_page')
 
   def test_subscription(self, test_setup):
     self.misc.getFooter().scroll_into_view_if_needed()
@@ -47,3 +50,4 @@ class TestMiscellaneous:
     self.misc.fillSubForm(emailSub)
     assert self.misc.getAlertSuccess().is_visible()
     assert self.misc.getAlertSuccess().inner_text() == 'You have been successfully subscribed!'
+    take_screenshot(self.page, 'subscription')

@@ -3,6 +3,7 @@ import pytest
 from pages.authorization_page import Authorization
 from pages.base_page import Base
 from data.data import Data
+from utils.tools import take_screenshot
 from faker import Faker
 import random
 fake = Faker()
@@ -59,6 +60,7 @@ class TestAuthorization:
     self.authorization.clickDeleteNav()
     assert self.authorization.getHeaderDeleteSuccess().is_visible()
     self.authorization.clickButtonContinue()
+    take_screenshot(self.page, 'register')
 
   def test_valid_login(self, test_setup):
     assert self.authorization.getSigninHeader().is_visible()
@@ -69,6 +71,7 @@ class TestAuthorization:
     """uncomment these code lines if you want to delete account, like it's specified in steps 9-10"""
   # self.authorization.clickDeleteNav()
   # assert self.authorization.getHeaderDeleteSuccess().is_visible()
+    take_screenshot(self.page, 'valid_login')
 
   def test_invalid_login(self, test_setup):
     assert self.authorization.getSigninHeader().is_visible()
@@ -76,6 +79,7 @@ class TestAuthorization:
     self.authorization.clickButtonSignin()
     assert self.authorization.getLoginError().is_visible()
     assert self.authorization.getLoginError().inner_text() == 'Your email or password is incorrect!'
+    take_screenshot(self.page, 'invalid_login')
 
   def test_logout(self, test_setup):
     assert self.authorization.getSigninHeader().is_visible()
@@ -85,6 +89,7 @@ class TestAuthorization:
     assert self.authorization.getUsername().inner_text() == nameSignin
     self.authorization.clickLogoutNav()
     assert self.page.url == 'https://automationexercise.com/login'
+    take_screenshot(self.page, 'logout')
 
   def test_register_existing(self, test_setup):
     assert self.authorization.getSignupHeader().is_visible()
@@ -92,3 +97,4 @@ class TestAuthorization:
     self.authorization.clickButtonSignup()
     assert self.authorization.getSignupError().is_visible()
     assert self.authorization.getSignupError().inner_text() == 'Email Address already exist!'
+    take_screenshot(self.page, 'register_existing')

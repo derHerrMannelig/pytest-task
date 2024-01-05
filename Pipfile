@@ -7,6 +7,7 @@ name = "pypi"
 pytest-playwright = "*"
 faker = "*"
 pytest-xdist = "*"
+allure-pytest = "*"
 
 [dev-packages]
 
@@ -14,8 +15,9 @@ pytest-xdist = "*"
 python_version = "3.12"
 
 [scripts]
-default = "pytest"
-parallel = "pytest --numprocesses auto"
-headed-chromium = "pytest --browser_name chromium --headed"
-headed-firefox = "pytest --browser_name firefox --headed"
-headed-webkit = "pytest --browser_name webkit --headed"
+headless-default = "pytest --alluredir=./reports --clean-alluredir"
+headless-parallel = "pytest --numprocesses auto --alluredir=./reports --clean-alluredir"
+headed-chromium = "pytest --browser_name chromium --headed --alluredir=./reports --clean-alluredir"
+headed-firefox = "pytest --browser_name firefox --headed --alluredir=./reports --clean-alluredir"
+headed-webkit = "pytest --browser_name webkit --headed --alluredir=./reports --clean-alluredir"
+report = "allure serve reports"

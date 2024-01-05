@@ -1,4 +1,5 @@
 import pytest
+import allure
 
 from playwright.sync_api import Playwright
 
@@ -29,3 +30,13 @@ def new_page(playwright: Playwright, request):
 
 def pytest_addoption(parser):
   parser.addoption('--browser_name', action='store', default='chromium')
+
+def pytest_runtest_makereport(item, call) -> None:
+  if call.when == "call":
+    if call.excinfo is not None and "new_page" in item.funcargs:
+      page = item.funcargs["new_page"]
+      allure.attach(
+        page.screenshot(full_page=True, type='png'),
+        name=f"{item.nodeid}.png",
+        attachment_type=allure.attachment_type.PNG
+      )
