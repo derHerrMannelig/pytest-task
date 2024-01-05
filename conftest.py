@@ -15,6 +15,12 @@ def new_page(playwright: Playwright, request):
   if browser_name == "webkit":
     browser = playwright.webkit.launch(headless=headless)
   context = browser.new_context(viewport={"width": 1920, "height": 1080})
+  def block_ads(route):
+    if route.request.url.startswith("https://googleads."):
+      route.abort()
+    else:
+      route.continue_()
+  context.route("**/*", block_ads)
   page = context.new_page()
   page.goto(f'http://automationexercise.com')
   page.wait_for_load_state()
