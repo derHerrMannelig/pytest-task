@@ -7,12 +7,10 @@ import random
 class TestProducts:
 
   @pytest.fixture
-  def test_setup(self, page):
-    self.page = page
-    self.page.set_viewport_size(viewport_size={'width': 1920, 'height': 1080})
+  def test_setup(self, new_page):
+    self.page = new_page
     self.base = Base(self.page)
     self.products = Products(self.page)
-    self.base.url("")
     assert self.base.getBody().is_visible()
     self.products.clickProductsNav()
     assert self.page.url == 'https://automationexercise.com/products'

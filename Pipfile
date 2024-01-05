@@ -6,7 +6,6 @@ name = "pypi"
 [packages]
 pytest-playwright = "*"
 faker = "*"
-pytest-base-url = "*"
 pytest-xdist = "*"
 
 [dev-packages]
@@ -16,7 +15,7 @@ python_version = "3.12"
 
 [scripts]
 default = "pytest"
-parallel = "pytest --base-url http://automationexercise.com --numprocesses auto"
-headed-chromium = "pytest --browser chromium --headed"
-headed-firefox = "pytest --browser firefox --headed"
-headed-webkit = "pytest --browser webkit --headed"
+parallel = "pytest --numprocesses auto"
+headed-chromium = "pytest --browser_name chromium --headed"
+headed-firefox = "pytest --browser_name firefox --headed"
+headed-webkit = "pytest --browser_name webkit --headed"
